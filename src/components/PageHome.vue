@@ -1,36 +1,55 @@
 <template>
-	<div>
-		<h1>Hello from Home Page!</h1>
-	</div>
-	<article v-for="thread in threads" :key="thread.id">
-		<h3>{{ thread.title }}</h3>
-		<div v-for="postId in thread.posts" :key="postId">
-			<p>{{ userById(postById(postId).userId).name }}</p>
-			<p>{{ postById(postId).text }}</p>
+	<article v-for="thread in threads"
+		:key="thread.id"
+		class="col-large push-top"
+	>
+		<h1>{{ thread.title }}</h1>
+
+		<div class="post-list">
+			<div v-for="postId in thread.posts"
+				:key="postId"
+				class="post"
+			>
+				<div class="user-info">
+					<a href="#" class="user-name">{{ userById(postById(postId).userId).name }}</a>
+					<a href="#">
+						<img class="avatar-large" :src="userById(postById(postId).userId).avatar" alt="avatar image">
+					</a>
+					<p class="desktop-only text-small">107 posts</p>
+				</div>
+
+				<div class="post-content">
+					<div>
+						<p>
+							{{ postById(postId).text }}
+						</p>
+					</div>
+				</div>
+
+				<div class="post-date text-faded">
+					<p>{{ postById(postId).publishedAt }}</p>
+				</div>
+
+			</div>
 		</div>
 	</article>
 </template>
 
-<script>
+<script setup>
 import sourceData from '@/data.json';
+import { ref } from 'vue';
 
-export default {
-	data() {
-		return {
-			threads: sourceData.threads,
-			posts: sourceData.posts,
-			users: sourceData.users
-		}
-	},
-	methods: {
-		postById(postId) {
-			return this.posts.find(p => p.id === postId)
-		},
-		userById(userId) {
-			return this.users.find(p => p.id === userId)
-		}
-	}
+const threads = ref(sourceData.threads);
+const posts = ref(sourceData.posts);
+const users = ref(sourceData.users);
+
+function postById(postId) {
+	return posts.value.find(p => p.id === postId)
 }
+function userById(userId) {
+	return users.value.find(p => p.id === userId)
+}
+
 </script>
 
 <style scoped>
