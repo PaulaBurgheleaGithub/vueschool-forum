@@ -35,20 +35,27 @@
 	</article>
 </template>
 
-<script setup>
+<script>
 import sourceData from '@/data.json';
-import { ref } from 'vue';
 
-const threads = ref(sourceData.threads);
-const posts = ref(sourceData.posts);
-const users = ref(sourceData.users);
+export default {
+	data() {
+		return {
+			threads: sourceData.threads,
+			posts: sourceData.posts,
+			users: sourceData.users
+		}
+	},
+	methods: {
+		postById(postId) {
+			return this.posts.find(p => p.id === postId)
+		},
+		userById(userId) {
+			return this.users.find(p => p.id === userId)
+		}
+	}
+}
 
-function postById(postId) {
-	return posts.value.find(p => p.id === postId)
-}
-function userById(userId) {
-	return users.value.find(p => p.id === userId)
-}
 
 </script>
 

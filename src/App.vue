@@ -1,30 +1,20 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <div class="container">
-    <PageHome />
+    <router-view /> 
   </div>
 
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import PageHome from './components/PageHome.vue';
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-  components: {
-    PageHome
-  }
+  name: 'App'
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+@import url("./assets/css/style.css");
 </style>
